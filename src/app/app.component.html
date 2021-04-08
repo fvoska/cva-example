@@ -21,9 +21,8 @@
       Rating:
     </label>
     <cvae-start-rating
-      [disabled]="!form.get('enableRating')?.value"
+      formControlName="rating"
       [numberOfStars]="numberOfStars"
-      (ratingChange)="onRatingChange($event)"
     ></cvae-start-rating>
     <div *ngIf="isFormSubmitted && form.get('rating')?.hasError('required')" class="error" @fade @height>
       Required
@@ -40,6 +39,10 @@
 
   <div>
     Valid: {{ form.valid }}
+  </div>
+
+  <div>
+    Touched: {{ form.touched }}
   </div>
 
   <hr>
