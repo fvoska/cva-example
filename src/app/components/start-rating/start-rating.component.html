@@ -1,6 +1,7 @@
 <span
   *ngFor="let number of numberOfStars | arrayOfNumbers"
   class="star"
+  [class.disabled]="disabled"
   (click)="onStarClick(number)"
 >
   {{ number <= rating ? '★' : '☆' }}

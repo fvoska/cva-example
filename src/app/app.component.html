@@ -1,8 +1,8 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
     Title:
     <input formControlName="title" type="text">
-    <div *ngIf="form.get('title')?.hasError('required')" class="error">
+    <div *ngIf="isFormSubmitted && form.get('title')?.hasError('required')" class="error">
       Required
     </div>
   </div>
@@ -10,32 +10,38 @@
   <div>
     Year:
     <input formControlName="releaseYear" type="number">
-    <div *ngIf="form.get('releaseYear')?.hasError('required')" class="error">
+    <div *ngIf="isFormSubmitted && form.get('releaseYear')?.hasError('required')" class="error">
       Required
     </div>
     <br>
   </div>
 
   <div>
+    <input type="checkbox" formControlName="enableRating">
     Rating:
     <cvae-start-rating
+      [disabled]="!form.get('enableRating')?.value"
       [numberOfStars]="numberOfStars"
       (ratingChange)="onRatingChange($event)"
     ></cvae-start-rating>
-    <div *ngIf="form.get('rating')?.hasError('required')" class="error">
+    <div *ngIf="isFormSubmitted && form.get('rating')?.hasError('required')" class="error">
       Required
     </div>
-    <div *ngIf="form.get('rating')?.errors?.min as minError" class="error">
+    <div *ngIf="isFormSubmitted && form.get('rating')?.errors?.min as minError" class="error">
       Minimum rating is {{ minError.min }} stars
     </div>
   </div>
   <br>
 
-  <button>Submit</button>
+  <button [disabled]="isFormSubmitted && form.invalid">Submit</button>
+
+  <hr>
 
   <div>
     Valid: {{ form.valid }}
   </div>
+
+  <hr>
 
   <div>
     Value:
