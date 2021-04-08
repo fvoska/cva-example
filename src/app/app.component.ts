@@ -24,10 +24,6 @@ export class AppComponent {
     console.log(this.form.value);
   }
 
-  public onRatingChange(newRating: number): void {
-    this.form.get('rating')?.setValue(newRating);
-  }
-
   private createForm(): FormGroup {
     const title = new FormControl('', [Validators.required]);
     const releaseYear = new FormControl(null, [Validators.required]);
