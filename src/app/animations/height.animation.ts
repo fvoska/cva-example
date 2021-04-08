@@ -1,0 +1,39 @@
+import { animate, AnimationTriggerMetadata, style, transition, trigger } from '@angular/animations';
+
+export const HEIGHT_DEFAULT_DURATION = 250;
+export const HEIGHT_DEFAULT_TRIGGER_NAME = 'height';
+
+const hiddenStyle = style({
+	height: 0,
+	'min-height': 0,
+	'padding-top': 0,
+	'padding-bottom': 0,
+	'margin-top': 0,
+	'margin-bottom': 0,
+});
+
+const visibleStyle = style({
+	height: '*',
+	'min-height': '*',
+	'padding-top': '*',
+	'padding-bottom': '*',
+	'margin-top': '*',
+	'margin-bottom': '*',
+});
+
+interface IFadeHeightAnimationOptions {
+	duration: number;
+	triggerName: string;
+}
+
+export function heightAnimation(
+	options: IFadeHeightAnimationOptions = {
+		duration: HEIGHT_DEFAULT_DURATION,
+		triggerName: HEIGHT_DEFAULT_TRIGGER_NAME,
+	}
+): AnimationTriggerMetadata {
+	return trigger(options.triggerName, [
+		transition(':enter', [hiddenStyle, animate(`${options.duration}ms ease-in-out`, visibleStyle)]),
+		transition(':leave', [visibleStyle, animate(`${options.duration}ms ease-in-out`, hiddenStyle)]),
+	]);
+}

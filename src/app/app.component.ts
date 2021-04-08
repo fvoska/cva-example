@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { fadeAnimation } from './animations/fade.animation.ts';
+import { heightAnimation } from './animations/height.animation';
 
 @Component({
   selector: 'cvae-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [fadeAnimation(), heightAnimation()]
 })
 export class AppComponent {
   public isFormSubmitted = false;

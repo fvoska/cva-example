@@ -1,3 +1,14 @@
-.error {
-  color: red;
+.form-field {
+  padding-bottom: 16px;
+
+  .error {
+    overflow: hidden;
+    color: red;
+    font-size: 0.75rem;
+  }
+}
+
+.checkbox-label {
+  cursor: pointer;
+  user-select: none;
 }
